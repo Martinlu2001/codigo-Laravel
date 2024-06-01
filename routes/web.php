@@ -2,10 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
 $servicios = [
     //
     /*['titulo' => 'Servicio 01'],
