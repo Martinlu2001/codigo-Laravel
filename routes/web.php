@@ -17,7 +17,7 @@ $servicios = [
 Route::view('/','home')->name('home');
 Route::view('nosotros','nosotros')->name('nosotros');
 //Route::get('servicios','App\Http\Controllers\ServiciosController@servicios')->name('servicios');
-//Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@index')->name('servicios');
+Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@index')->name('servicios');
 /*Route::get('servicios/create', 'App\Http\Controllers\Servicios2Controller@create')->name('servicios');
 Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@store')->name('servicios');
 Route::get('servicios/{servicio}', 'App\Http\Controllers\Servicios2Controller@show')->name('servicios');
@@ -25,7 +25,7 @@ Route::get('servicios/{servicio}/edit', 'App\Http\Controllers\Servicios2Controll
 Route::get('servicios/{servicio}', 'App\Http\Controllers\Servicios2Controller@update')->name('servicios');
 Route::get('servicios/{servicio}', 'App\Http\Controllers\Servicios2Controller@destroy')->name('servicios');
 */
-Route::resource('servicios', 'App\Http\Controllers\Servicios2Controller');
+//Route::resource('servicios', 'App\Http\Controllers\Servicios2Controller');
 //Route::resource('servicios','App\Http\Controllers\Servicios2Controller')->only('index','show');
 //Route::resource('servicios','App\Http\Controllers\Servicios2Controller')->except('index','show');
 
