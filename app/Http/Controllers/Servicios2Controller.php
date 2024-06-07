@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Servicio;
+//use DB;
 
 class Servicios2Controller extends Controller
 {
@@ -11,13 +13,21 @@ class Servicios2Controller extends Controller
      */
     public function index()
     {
-        $servicios = [
-            ['titulo' => 'Servicio 01'],
-            ['titulo' => 'Servicio 02'],
-            ['titulo' => 'Servicio 03'],
-            ['titulo' => 'Servicio 04'],
-            ['titulo' => 'Servicio 05'],
-        ];
+        //$servicios = DB::table('servicios')->get();
+        //$servicios = Servicio::get();
+          $servicios = Servicio::latest()->paginate(2);
+        
+
+        /*$servicios = DB::table('servicios')->save();
+        $servicios = DB::table('servicios')->update();
+        $servicios = DB::table('servicios')->delete();*/
+        /*$servicios = [
+            ['titulo' => 'Mantenimiento'],
+            ['titulo' => 'Afinamiento'],
+            ['titulo' => 'Cambio de aceite'],
+            ['titulo' => 'Lavado tipo salon'],
+            
+        ];*/
         return view('servicios', compact('servicios'));
     }
 
@@ -40,8 +50,12 @@ class Servicios2Controller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
+        //return Servicio::find($id);
+        return view('show',[
+            'servicio' => Servicio::find($id)
+        ]);
         //
     }
 

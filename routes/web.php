@@ -14,7 +14,8 @@ $servicios = [
 Route::view('/','home')->name('home');
 Route::view('nosotros','nosotros')->name('nosotros');
 //Route::get('servicios','App\Http\Controllers\ServiciosController@servicios')->name('servicios');
-Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@index')->name('servicios');
+Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@index')->name('servicios.index');
+Route::get('servicios/{id}', 'App\Http\Controllers\Servicios2Controller@show')->name('servicios.show');
 /*Route::get('servicios/create', 'App\Http\Controllers\Servicios2Controller@create')->name('servicios');
 Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@store')->name('servicios');
 Route::get('servicios/{servicio}', 'App\Http\Controllers\Servicios2Controller@show')->name('servicios');

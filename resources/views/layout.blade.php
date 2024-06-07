@@ -9,7 +9,21 @@
         .activo a{
             color:red;
             text-decoration:none; 
-            padding: 10px 50px;
+            
+        }
+        .cust{
+            padding:10px 50px;
+
+        }
+        a{
+            text-decoration:none;
+        }
+        .table1{
+            justify-content: center;
+            display:flex;
+        }
+        thead{
+            color:white;
         }
         /* .activo1 a{
             padding: 10px 50px;
@@ -22,7 +36,7 @@
 <body>
     <nav>
         <!-- {{dump(request()->routeIs('home'))}} -->
-        <table class="table">
+        <table class="table1">
             <!-- <thead class="table table-bordered">
                 <tr> -->
                     <!-- <th scope="col" class="activo"><a href="/">Home</a></th>
