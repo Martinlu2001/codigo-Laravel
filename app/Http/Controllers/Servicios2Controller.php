@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Servicio;
+use App\Http\Requests\CreateServicioRequest;
 //use DB;
 
 class Servicios2Controller extends Controller
@@ -36,16 +37,33 @@ class Servicios2Controller extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * Request $request
      */
-    public function store(Request $request)
+    public function store(CreateServicioRequest $request)
     {
-        //
+        /*$titulo = request('titulo');
+        $descripcion = request('descripcion');
+
+        Servicio::create([
+            'titulo' => $titulo,
+            'descripcion' => $descripcion
+        ]);*/
+        //Servicio::create(request()->all);
+        /*$camposv = request()->validate([
+            'titulo' => 'required',
+            'descripcion' => 'required'
+        ]);
+        Servicio::create($camposv);*/
+        Servicio::create($request->validated());
+
+        return redirect()->route('servicios.index');
     }
+
 
     /**
      * Display the specified resource.

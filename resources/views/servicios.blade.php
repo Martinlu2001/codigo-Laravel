@@ -21,6 +21,14 @@
     } */
 
 </style>
+<tr>
+    <td colspan="4">
+        <a href="{{route('servicios.create')}}">Nuevo servicio</a>
+    </td>
+</tr>
+<tr>
+    <th colspan="4">Listado de servicios</th>
+</tr>
 <table class="tablaservicios">
     
         <tr>

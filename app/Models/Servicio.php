@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Servicio extends Model
 {
-    
+    //protected $fillable = ['titulo', 'descripcion'];
+    protected $guarded = [];
     //$servicios = DB::table('servicios')->get();
 }
