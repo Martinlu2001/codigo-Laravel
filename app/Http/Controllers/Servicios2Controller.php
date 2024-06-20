@@ -37,7 +37,10 @@ class Servicios2Controller extends Controller
      */
     public function create()
     {
-        return view('create');
+        //return view('create');
+        return view('create',[
+            'servicio' => new Servicio
+        ]);
     }
 
     /**
@@ -80,24 +83,38 @@ class Servicios2Controller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Servicio $id)
     {
         //
+        return view('edit',[
+            'servicio' => $id
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * Request $request, string 
+     * $id
+     * 
      */
-    public function update(Request $request, string $id)
+    public function update(Servicio $id, CreateServicioRequest $request)
     {
         //
+        /*$id->update([
+            'titulo' => request('titulo'),
+            'descripcion' => request('descripcion')
+        ]);*/
+        $id->update($request->validated());
+        return redirect()->route('servicios.show', $id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Servicio $servicio)
     {
         //
+        $servicio->delete();
+        return redirect()->route('servicios.index');
     }
 }
