@@ -35,3 +35,5 @@ Route::get('servicios/{servicio}', 'App\Http\Controllers\Servicios2Controller@de
 
 //Route::view('servicios','servicios', compact('servicios'))->name('servicios');
 Route::view('contacto','contacto')->name('contacto');
+Route::post('contacto', 'App\Http\Controllers\ContactoController@store');
+
