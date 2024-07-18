@@ -12,6 +12,12 @@ class Servicios2Controller extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function  _construct(){
+        //$this->middleware('auth')->only('create', 'edit');
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     public function index()
     {
         //$servicios = DB::table('servicios')->get();
@@ -64,7 +70,8 @@ class Servicios2Controller extends Controller
         Servicio::create($camposv);*/
         Servicio::create($request->validated());
 
-        return redirect()->route('servicios.index');
+        //return redirect()->route('servicios.index');
+        return redirect()->route('servicios.index')->with('estado', 'El servicio fue creado correctamente');
     }
 
 
@@ -83,11 +90,11 @@ class Servicios2Controller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Servicio $id)
+    public function edit(Servicio $servicio)
     {
         //
         return view('edit',[
-            'servicio' => $id
+            'servicio' => $servicio
         ]);
     }
 
@@ -97,15 +104,16 @@ class Servicios2Controller extends Controller
      * $id
      * 
      */
-    public function update(Servicio $id, CreateServicioRequest $request)
+    public function update(Servicio $servicio, CreateServicioRequest $request)
     {
         //
         /*$id->update([
             'titulo' => request('titulo'),
             'descripcion' => request('descripcion')
         ]);*/
-        $id->update($request->validated());
-        return redirect()->route('servicios.show', $id);
+        $servicio->update($request->validated());
+        //return redirect()->route('servicios.show', $id);
+        return redirect()->route('servicios.show', $servicio)->with('estado', 'El servicio fue actualizado correctamente');
     }
 
     /**
@@ -115,6 +123,7 @@ class Servicios2Controller extends Controller
     {
         //
         $servicio->delete();
-        return redirect()->route('servicios.index');
+        //return redirect()->route('servicios.index');
+        return redirect()->route('servicios.index')->with('estado', 'El servicio fue eliminado correctamente');
     }
 }

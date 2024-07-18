@@ -4,10 +4,7 @@
 
 @section('content')
 
-<h1>El campo titulo es obligatorio</h1>
-<h1>El campo descripcion es obligatorio</h1>
-<table cellpadding="3" cellspaceing="5">
-
+<table cellpadding="3" cellspacing="5" class="table table-bordered" style="display:flex;">
     <tr>
         <th colspan="4">Crear nuevo servicio</th>
     </tr>

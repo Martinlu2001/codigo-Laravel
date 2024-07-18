@@ -10,5 +10,5 @@
 </tr>
 
 <tr>
-    <td colspan="2" align="center"><button>{{$btnText}}</button></td>
+    <td colspan="2" align="center"><button  class="btn btn-primary">{{$btnText}}</button></td>
 </tr>

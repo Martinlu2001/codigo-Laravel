@@ -4,39 +4,23 @@
 
 @section('content')
 
-<style>
-    .tablaservicios{
-        justify-content: center;
-        display:flex;
-    }
+<table class="table table-bordered" style="display:flex;">
+    <tr>
+        @auth
+        <td colspan="4">
+            <a href="{{route('servicios.create')}}"> + Nuevo servicio</a>
+        </td>
+        @endauth
+    </tr>
+</table>
 
-    .linke-link {
-        font-size: 10rem; /* Ajusta el tamaño de la paginación */
-        padding: 10rem 10rem;
-        color:green; 
-    }
+<h2 style="text-align:center;">Listado de servicios</h2>
 
-    /* .linke {
-        padding: 0.5rem 0.75rem; 
-    } */
-
-</style>
-<tr>
-    <td colspan="4">
-        <a href="{{route('servicios.create')}}">Nuevo servicio</a>
-    </td>
-</tr>
-<tr>
-    <th colspan="4">Listado de servicios</th>
-</tr>
-<table class="tablaservicios">
-    
+<table class="table table-bordered" style="display:flex;">
         <tr>
             @if($servicios)
                 @foreach($servicios as $servicio)
-
-                    <td><a href="{{ route('servicios.show',$servicio)}}">{{$servicio->titulo}}</a></td>
-                    
+                    <td><a href="{{ route('servicios.show',$servicio)}}">{{$servicio->titulo}}</a></td>                   
                 @endforeach
             @else
                 <li>No existe ningun servicio que mostrar</li>
@@ -44,10 +28,7 @@
         </tr>
 
         <tr>
-            <td colspan="4" class="linke">{{$servicios->links()}}</td>
+            <td colspan="4">{{$servicios->links('pagination::bootstrap-5')}}</td>
         </tr>
 </table>
-
-
-        
 @endsection

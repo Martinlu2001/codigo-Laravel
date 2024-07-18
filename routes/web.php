@@ -2,18 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-$servicios = [
-    //
-    /*['titulo' => 'Servicio 01'],
-    ['titulo' => 'Servicio 02'],
-    ['titulo' => 'Servicio 03'],
-    ['titulo' => 'Servicio 04'],
-    ['titulo' => 'Servicio 05'],*/
-];
-
 Route::view('/','home')->name('home');
 Route::view('nosotros','nosotros')->name('nosotros');
-//Route::get('servicios','App\Http\Controllers\ServiciosController@servicios')->name('servicios');
+
+Route::resource('servicios','App\Http\Controllers\Servicios2Controller')->names('servicios')->middleware('auth');
+/*
 Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@index')->name('servicios.index');
 Route::get('servicios/crear', 'App\Http\Controllers\Servicios2Controller@create')->name('servicios.create');
 Route::get('servicios/{id}/editar', 'App\Http\Controllers\Servicios2Controller@edit')->name('servicios.edit');
@@ -21,6 +14,12 @@ Route::patch('servicios/{id}', 'App\Http\Controllers\Servicios2Controller@update
 Route::post('servicios', 'App\Http\Controllers\Servicios2Controller@store')->name('servicios.store');
 Route::get('servicios/{id}', 'App\Http\Controllers\Servicios2Controller@show')->name('servicios.show');
 Route::delete('servicios/{servicio}', 'App\Http\Controllers\Servicios2Controller@destroy')->name('servicios.destroy');
+*/
+
+
+
+
+
 
 /*Route::get('servicios/create', 'App\Http\Controllers\Servicios2Controller@create')->name('servicios');
 Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@store')->name('servicios');
@@ -37,3 +36,7 @@ Route::get('servicios/{servicio}', 'App\Http\Controllers\Servicios2Controller@de
 Route::view('contacto','contacto')->name('contacto');
 Route::post('contacto', 'App\Http\Controllers\ContactoController@store');
 
+
+Auth::routes(['register' => false]);
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

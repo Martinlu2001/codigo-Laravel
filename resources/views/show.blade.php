@@ -4,21 +4,28 @@
 
 @section('content')
 
-<tr>
-    <td colspan="4">{{$servicio->titulo}} </td>
-    <a href="{{route('servicios.edit', $servicio)}}">Editar</a>
-    <td colspan="2">
-        <form action="{{route('servicios.destroy', $servicio)}}" method="post">
-            @csrf @method('DELETE')
-            <button>Eliminar</button>
-        </form>
+<table cellpadding="3" cellspacing="5" class="table table-bordered" style="display:flex;">
+    @auth
+    <tr>
+        <th>Titulo: </th>
+        <td colspan="4">{{$servicio->titulo}} </td>
+        
+    </tr>
 
-    </td>
-</tr>
-<br>
-<tr>
-    <td colspan="4">{{$servicio->descripcion}}</td>
-</tr>
-<br>
+    <tr>
+        <th>Descripcion: </th>
+        <td colspan="4">{{$servicio->descripcion}}</td>
+    </tr>
 
+    <tr>
+        <td><a href="{{route('servicios.edit', $servicio)}}">Editar</a></td>
+        <td colspan="2">
+            <form action="{{route('servicios.destroy', $servicio)}}" method="post">
+                @csrf @method('DELETE')
+                <button class="btn btn-danger">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    @endauth   
+</table>
 @endsection
