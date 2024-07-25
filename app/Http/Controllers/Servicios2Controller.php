@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Servicio;
 use App\Http\Requests\CreateServicioRequest;
 //use DB;
@@ -68,7 +69,10 @@ class Servicios2Controller extends Controller
             'descripcion' => 'required'
         ]);
         Servicio::create($camposv);*/
-        Servicio::create($request->validated());
+        //Servicio::create($request->validated());
+        $servicio = new Servicio($request->validated());
+        $servicio->image = $request->file('image')->store('images');
+        $servicio->save();
 
         //return redirect()->route('servicios.index');
         return redirect()->route('servicios.index')->with('estado', 'El servicio fue creado correctamente');
@@ -111,7 +115,15 @@ class Servicios2Controller extends Controller
             'titulo' => request('titulo'),
             'descripcion' => request('descripcion')
         ]);*/
-        $servicio->update($request->validated());
+        if( $request->hasFile('image')){
+            Storage::delete($servicio->image);
+            $servicio->fill($request->validated());
+            $servicio->image = $request->file('image')->store('images');
+            $servicio->save();
+        }else{
+            $servicio->update(array_filter($request->validated()));
+        }
+        
         //return redirect()->route('servicios.show', $id);
         return redirect()->route('servicios.show', $servicio)->with('estado', 'El servicio fue actualizado correctamente');
     }
@@ -121,7 +133,8 @@ class Servicios2Controller extends Controller
      */
     public function destroy(Servicio $servicio)
     {
-        //
+        Storage::delete($servicio->image);
+
         $servicio->delete();
         //return redirect()->route('servicios.index');
         return redirect()->route('servicios.index')->with('estado', 'El servicio fue eliminado correctamente');

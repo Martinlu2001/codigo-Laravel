@@ -3,29 +3,29 @@
 @section('title', 'Servicio |' . $servicio->titulo)
 
 @section('content')
+<style>
+    .hola{
+        column-count:2;
+    }
+</style>
+<div class="container" style="justify-content:center; display:flex;">
+@auth
+    <div class="card" style="width: 18rem; text-align:center;">
+        <img src="/storage/{{ $servicio->image}}" class="card-img-top" alt="{{ $servicio->titulo}}">
+        <div class="card-body">
+            <h5 class="card-title">{{$servicio->titulo}}</h5>
+            <p class="card-text">{{$servicio->descripcion}}</p>
+            <div class="hola">
+                <a href="{{route('servicios.edit', $servicio)}}" class="btn btn-primary">Editar</a>
+                <form action="{{route('servicios.destroy', $servicio)}}" method="post">
+                    @csrf @method('DELETE')
+                    <button class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+@endauth
+</div>
 
-<table cellpadding="3" cellspacing="5" class="table table-bordered" style="display:flex;">
-    @auth
-    <tr>
-        <th>Titulo: </th>
-        <td colspan="4">{{$servicio->titulo}} </td>
-        
-    </tr>
-
-    <tr>
-        <th>Descripcion: </th>
-        <td colspan="4">{{$servicio->descripcion}}</td>
-    </tr>
-
-    <tr>
-        <td><a href="{{route('servicios.edit', $servicio)}}">Editar</a></td>
-        <td colspan="2">
-            <form action="{{route('servicios.destroy', $servicio)}}" method="post">
-                @csrf @method('DELETE')
-                <button class="btn btn-danger">Eliminar</button>
-            </form>
-        </td>
-    </tr>
-    @endauth   
-</table>
 @endsection
