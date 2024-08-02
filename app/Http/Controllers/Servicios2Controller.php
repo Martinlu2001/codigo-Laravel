@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+//require './vendor/autoload.php';
+
 use Illuminate\Http\Request;
 use App\Events\ServicioSaved;
-use Intervention\Image\Facades\Image;
+//use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\Servicio;
@@ -77,11 +81,11 @@ class Servicios2Controller extends Controller
         $servicio->image = $request->file('image')->store('images');
         $servicio->save();
 
-        $image = Image::make(Storage::get($servicio->image))
-                ->widen(600)
-                ->limitColors(255)
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read(Storage::get($servicio->image))       
+                ->scale(width: 600)
                 ->encode();
-
+        
         Storage::put($servicio->image,(string) $image);
         ServicioSaved::dispatch($servicio);
 
@@ -132,9 +136,9 @@ class Servicios2Controller extends Controller
             $servicio->image = $request->file('image')->store('images');
             $servicio->save();
 
-            $image = Image::make(Storage::get($servicio->image))
-                ->widen(600)
-                ->limitColors(255)
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read(Storage::get($servicio->image))
+                ->scale(width: 600)
                 ->encode();
 
             Storage::put($servicio->image,(string) $image);
