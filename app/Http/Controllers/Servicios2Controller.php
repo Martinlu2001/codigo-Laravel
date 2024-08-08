@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-//require './vendor/autoload.php';
-
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Events\ServicioSaved;
-//use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +28,7 @@ class Servicios2Controller extends Controller
     {
         //$servicios = DB::table('servicios')->get();
         //$servicios = Servicio::get();
-          $servicios = Servicio::latest()->paginate(2);
+          //$servicios = Servicio::latest()->paginate(2);
         
 
         /*$servicios = DB::table('servicios')->save();
@@ -43,7 +41,10 @@ class Servicios2Controller extends Controller
             ['titulo' => 'Lavado tipo salon'],
             
         ];*/
-        return view('servicios', compact('servicios'));
+        //return view('servicios', compact('servicios'));
+        return view('servicios', [
+            'servicios' => Servicio::with('category')->latest()->paginate()
+        ]);
     }
 
     /**
@@ -53,7 +54,8 @@ class Servicios2Controller extends Controller
     {
         //return view('create');
         return view('create',[
-            'servicio' => new Servicio
+            'servicio' => new Servicio,
+            'categories' => Category::pluck('name', 'id')
         ]);
     }
 
@@ -113,7 +115,8 @@ class Servicios2Controller extends Controller
     {
         //
         return view('edit',[
-            'servicio' => $servicio
+            'servicio' => $servicio,
+            'categories' => Category::pluck('name', 'id')
         ]);
     }
 

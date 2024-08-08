@@ -6,6 +6,7 @@ Route::view('/','home')->name('home');
 Route::view('nosotros','nosotros')->name('nosotros');
 
 Route::resource('servicios','App\Http\Controllers\Servicios2Controller')->names('servicios')->middleware('auth');
+Route::get('categorias/{category}', 'App\Http\Controllers\CategoryController@show')->name('categories.show');
 /*
 Route::get('servicios', 'App\Http\Controllers\Servicios2Controller@index')->name('servicios.index');
 Route::get('servicios/crear', 'App\Http\Controllers\Servicios2Controller@create')->name('servicios.create');

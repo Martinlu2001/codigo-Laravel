@@ -24,6 +24,10 @@ class CreateServicioRequest extends FormRequest
     {
         return [
             'titulo' => 'required',
+            'category_id' => [
+                'required',
+                'exists:categories,id'
+            ],
             'descripcion' => 'required',
             'image' => [
                 $this->route('servicio') ? 'nullable': 'required',

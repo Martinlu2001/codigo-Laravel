@@ -6,6 +6,14 @@
 
 <table class="table table-bordered" style="display:flex;">
     <tr>
+        @isset($category)
+            <div>
+                <h1 class="display-4 mb-0">{{$category->name}}</h1>
+                <a href="{{route('servicios.index')}}">Regresar a servicios</a>
+            </div>
+        @else
+            <h1 class="display-4 mb-0"> Servicios</h1>
+        @endisset
         @auth
         <td colspan="4">
             <a href="{{route('servicios.create')}}"> + Nuevo servicio</a>
@@ -29,7 +37,11 @@
                     
                     <td>
                         <a href="{{ route('servicios.show',$servicio)}}">{{$servicio->titulo}}</a>
-                    </td>                   
+                    </td> 
+                    @if($servicio->category_id)
+                        <!-- <a href="{{route('categories.show', $servicio->category)}}" class="badge badge-secondary">{{$servicio->category->name}}</a> -->
+                        <a href="#" class="badge badge-secondary">{{$servicio->category->name}}</a>
+                    @endif                  
                 @endforeach
                 </tr>
             @else
